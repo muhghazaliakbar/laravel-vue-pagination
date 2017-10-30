@@ -19,18 +19,34 @@ module.exports = {
 		limit: {
 			type: Number,
 			default: 0
+		},
+        position: {
+			type: String,
+			default: ''
 		}
 	},
 
-	template: '<ul class="pagination" v-if="data.total > data.per_page">\
+	template: '<ul class="pagination" :class="align" v-if="data.total > data.per_page">\
 		<li class="page-item" v-if="data.prev_page_url">\
-			<a class="page-link" href="#" aria-label="Previous" @click.prevent="selectPage(--data.current_page)"><span aria-hidden="true">&laquo;</span></a>\
+			<a class="page-link" href="#" aria-label="Previous" @click.prevent="selectPage(--data.current_page)"><span aria-hidden="true">Previous</span></a>\
 		</li>\
 		<li class="page-item" v-for="n in getPages()" :class="{ \'active\': n == data.current_page }"><a class="page-link" href="#" @click.prevent="selectPage(n)">{{ n }}</a></li>\
 		<li class="page-item" v-if="data.next_page_url">\
-			<a class="page-link" href="#" aria-label="Next" @click.prevent="selectPage(++data.current_page)"><span aria-hidden="true">&raquo;</span></a>\
+			<a class="page-link" href="#" aria-label="Next" @click.prevent="selectPage(++data.current_page)"><span aria-hidden="true">Next</span></a>\
 		</li>\
 	</ul>',
+
+	computed: {
+		align () {
+			if (this.position === 'center') {
+				return 'justify-content-center'
+			} else if (this.position === 'right') {
+                return 'justify-content-end'
+            } else {
+				return;
+			}
+        }
+	},
 
 	methods: {
 		selectPage: function(page) {
