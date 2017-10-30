@@ -27,11 +27,11 @@ module.exports = {
 	},
 
 	template: '<ul class="pagination" :class="align" v-if="data.total > data.per_page">\
-		<li class="page-item" v-if="data.prev_page_url">\
+		<li class="page-item" :class="{ disabled: data.prev_page_url }">\
 			<a class="page-link" href="#" aria-label="Previous" @click.prevent="selectPage(--data.current_page)"><span aria-hidden="true">Previous</span></a>\
 		</li>\
 		<li class="page-item" v-for="n in getPages()" :class="{ \'active\': n == data.current_page }"><a class="page-link" href="#" @click.prevent="selectPage(n)">{{ n }}</a></li>\
-		<li class="page-item" v-if="data.next_page_url">\
+		<li class="page-item" :class="{ disabled: data.next_page_url }">\
 			<a class="page-link" href="#" aria-label="Next" @click.prevent="selectPage(++data.current_page)"><span aria-hidden="true">Next</span></a>\
 		</li>\
 	</ul>',
